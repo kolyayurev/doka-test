@@ -1,0 +1,22 @@
+{
+    "name": "kolyayurev/doka-test",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        },
+        "files": [
+            "core/Helpers/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "kolyayurev",
+            "email": "kolyayurew@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=8.0",
+        "ext-pdo": "*"
+    }
+}
