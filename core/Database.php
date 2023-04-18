@@ -16,8 +16,10 @@ class Database
     }
 
 
-    public function query($sql) {
+    public  function query($sql) : self
+    {
         $this->stmt = $this->conn->prepare($sql);
+        return $this;
     }
 
     public function bind($param, $value, $type = null){
@@ -44,17 +46,21 @@ class Database
         return $this->stmt->execute();
     }
 
-    public function resultSet(){
+    public function get(){
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function single(){
+    public function get_array(){
         $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Get row count
+    public function single(){
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function rowCount(){
         return $this->stmt->rowCount();
     }

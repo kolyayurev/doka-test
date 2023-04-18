@@ -19,7 +19,16 @@ if (! function_exists('config')) {
 if (! function_exists('view')) {
     function view(string $name,array $data = [])
     {
-        require_once APP_ROOT. "/resources/views/{$name}.php";
+        extract($data);
+        require APP_ROOT. "/resources/views/{$name}.php";
+    }
+}
+
+if (! function_exists('dump')) {
+    function dump(){
+        echo '<pre>';
+        var_dump(func_get_args());
+        echo '</pre>';
     }
 }
 

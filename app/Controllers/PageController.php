@@ -17,7 +17,7 @@ class PageController extends Controller
     }
 
     public function index () {
-        $title = 'Hello!';
+        $title = 'Home page!';
 
         $this->view('pages/main', compact('title'));
     }

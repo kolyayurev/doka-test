@@ -10,13 +10,24 @@ class Product extends Model
 
         $this->db->query("SELECT * FROM products");
 
-        return $this->db->resultSet();
+        return $this->db->get();
     }
 
-    public function getByGroup() {
+    public function getByGroup($groupId) {
 
-        $this->db->query("SELECT * FROM products");
+        $groupIds = (new Group())->getNestedIds($groupId);
 
-        return $this->db->resultSet();
+        $this->db->query("SELECT * FROM products WHERE id_group IN (" . implode(',',$groupIds) .")");
+
+        return $this->db->get();
+    }
+
+    public function getCountInGroup($groupId) {
+
+        $groupIds = (new Group())->getNestedIds($groupId);
+
+        $result = $this->db->query("SELECT COUNT(*) as total FROM products WHERE id_group IN (" . implode(',',$groupIds) .")")->single();
+
+        return $result['total'] ?? 0;
     }
 }

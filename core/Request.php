@@ -26,9 +26,12 @@ class Request
 
     public function getParam(string $name, $default = null)
     {
+        $params = [];
+
         $url_components = parse_url($this->getUri());
 
-        parse_str($url_components['query'], $params);
+        if(array_key_exists('query',$url_components))
+            parse_str($url_components['query'], $params);
 
         return $params[$name] ?? $default;
     }

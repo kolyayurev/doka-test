@@ -19,9 +19,10 @@ class CatalogController extends Controller
 
     public function index(Request $request) {
 
-//        dd($request->getParam('group'));
-        $groups = $this->groupModel->getByAll();
-        $products = $this->productModel->getByGroup();
+        $groupId = (int)$request->getParam('group',0);
+
+        $groups = $this->groupModel->getTree($groupId);
+        $products = $this->productModel->getByGroup($groupId);
 
         $this->view('catalog/index', compact('groups','products'));
     }
